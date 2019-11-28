@@ -1,0 +1,12 @@
+dependencies {
+  compile project(':krxpoc-home-common')
+
+  compile "io.blocko:coinstack-utils:${coinstackCommonVersion}"
+  compile ("io.blocko:coinstack-spring:${coinstackCommonVersion}") {
+    exclude group: 'org.springframework.boot', module: 'spring-boot-starter-security'
+  }
+  compile 'com.beust:jcommander:1.72'
+  compile "org.springframework.boot:spring-boot-starter:${springBootVersion}"
+
+  testCompile "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
+}

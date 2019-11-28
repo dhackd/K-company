@@ -1,0 +1,17 @@
+usage: krx <command> [<subcommand>] [--log <loglevel>] [<args>]
+
+These are various krx cli:
+help
+                        Print the help out - you can see this.
+
+server
+  check                 Check a server status
+  log                   Print log out
+  restart               Restart server
+  run                   Run an dlt server
+    --daemon            Run an dlt server as daemon
+    --profile           Add execution profiles on run
+  start                 Run an dlt server as daemon
+    --profile           Add execution profiles on run
+  stop                  Stop a running dlt server (gracefully shutdown)
+    --force | -f        Stop a running dlt server (forcely shutdown)

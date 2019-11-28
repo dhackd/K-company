@@ -1,0 +1,51 @@
+legacy:
+  server: http://localhost:8080
+  
+hsm:
+  server: http://localhost:8082
+  
+coinstack:
+  endpoint: http://localhost:3000
+  server:
+    privatekeys: L3k5T3xBc6kc3owCHak84R14yyCQW5WQSPRBs3kNaZtdjyC2uyfZ
+    
+server:
+  hostname: localhost
+  port: 9080
+  
+kafka:
+  endpoint: PLAINTEXT://192.168.0.191:9092, PLAINTEXT://192.168.0.192:9092
+  
+spring:
+  servlet:
+    multipart:
+      max-file-size: 128MB
+      max-request-size: 128MB
+  liquibase:
+    change-log: classpath:/db/krx-changelog-master.yaml
+  datasource:
+    initialize: true
+    username: blocko
+    password: blocko
+    url: jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;MODE=MYSQL
+    validationQuery: SELECT 1
+  devtools:
+    livereload:
+      enabled: true
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: true
+  jpa:
+    hibernate:
+      ddl-auto: create
+      globally_quoted_identifiers: true
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      format_sql: true
+      dialect: org.hibernate.dialect.MySQL57InnoDBDialect
+    jadira:
+      usertype:
+        autoRegisterUserTypes: true
+    show-sql: true

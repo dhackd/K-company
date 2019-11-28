@@ -1,0 +1,89 @@
+#!/bin/bash
+# resolve links - $0 may be a softlink
+if [ -z "$KRX_HOME" ];then
+  PRG="$0"
+  while [ -h "$PRG" ] ; do
+    ls=$(ls -ld "$PRG")
+    link=$(expr "$ls" : '.*-> \(.*\)$')
+    if expr "$link" : '/.*' > /dev/null; then
+      PRG="$link"
+    else
+      PRG=$(dirname "$PRG")/"$link"
+    fi
+  done
+
+  cd "$(dirname "$PRG")/.." || exit 1
+  KRX_HOME="$(pwd)"
+  export KRX_HOME
+  cd - &>/dev/null || exit 1
+fi
+# Option definitions
+export PRETTY_PRINT=${PRETTY_PRINT:-"Y"}
+
+# Directory definitions
+export KRX_BIN=${KRX_BIN:-$KRX_HOME/bin}
+export KRX_CONF=${KRX_CONF:-$KRX_HOME/conf}
+export KRX_DOC=${KRX_DOC:-$KRX_HOME/doc}
+export KRX_LIB=${KRX_LIB:-$KRX_HOME/lib}
+export KRX_LOG=${KRX_LOG:-$KRX_HOME/log}
+
+export EXECUTION_MODE=native
+
+source "$KRX_BIN/krx-common"
+
+if [ 0 == $# ]; then
+  fail "No command!!"
+  message "Type '$0 help' for more informations"
+  exit -1
+else
+  ARG1="$1"
+  shift
+  if [ 0 == $# ]; then
+    case "$ARG1" in
+      "help")
+        print-help $@
+        ;;
+      "version")
+        print-version $@
+        ;;
+      "server"|"client"|"code"|"token")
+        fail "More command needed!"
+        print-help $@
+        ;;
+      *)
+        fail "Unknown command!"
+        print-help $@
+        ;;
+    esac
+    exit 2
+  fi
+fi
+
+ARG2="$1"
+shift
+
+case "$ARG1" in
+  "help")
+    print-help $@
+    ;;
+  "version")
+    print-version $@
+    ;;
+  "server")
+    COMMAND_TARGET="$ARG1"
+    COMMAND="$ARG2"
+    ;;
+  *)
+    case "$ARG2" in
+      "server")
+        COMMAND_TARGET="$ARG2"
+        COMMAND="$ARG1"
+        ;;
+      *)
+        fail "Unknown command!"
+        ;;
+    esac
+    ;;
+esac
+
+declare -f $COMMAND-$COMMAND_TARGET > /dev/null && $COMMAND-$COMMAND_TARGET $@ || fail "Fail to execute the command"

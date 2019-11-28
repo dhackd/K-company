@@ -1,0 +1,10 @@
+databaseChangeLog:
+    - include:
+        file: v1/buy.yaml
+        relativeToChangelogFile: true
+    - include:
+        file: v1/sell.yaml
+        relativeToChangelogFile: true
+    - include:
+        file: v1/scenario.yaml
+        relativeToChangelogFile: true

@@ -1,0 +1,19 @@
+apply plugin: 'distribution'
+uploadArchives.enabled = false
+
+dependencies {
+  compile project(':krxpoc-home-_buildType_')
+  compile project(':krxpoc-home-cli')
+}
+
+distributions {
+  main {
+    baseName = 'krxpoc-home-_buildName_'
+    contents {
+      from { 'src/assembly' }
+      into('lib') {
+        from configurations.runtime
+      }
+    }
+  }
+}

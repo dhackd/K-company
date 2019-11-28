@@ -1,0 +1,22 @@
+group 'io.blocko'
+
+apply plugin: 'distribution'
+uploadArchives.enabled = false
+
+dependencies {
+  runtime group: 'mysql', name: 'mysql-connector-java', version: '6.0.6'
+
+  compile project(':krxpoc-home-server')
+}
+
+distributions {
+  main {
+    baseName = 'krxpoc-home-dlt'
+    contents {
+      from { 'src/assembly' }
+      into('lib') {
+        from configurations.runtime
+      }
+    }
+  }
+}

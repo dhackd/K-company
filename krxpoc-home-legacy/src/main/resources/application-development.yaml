@@ -1,0 +1,67 @@
+kafka:
+  server: http://localhost:9080
+  channel:
+    bank01: krx-bank01-test
+    ksd: krx-ksd-test
+  globalId:
+    bank01: 0krx01bank0120181226034802000001
+    ksd: 0krx010ksd0120181219223427000001
+
+senario:
+  token:
+    count: 10
+    
+hsm:
+  server: http://localhost:8082
+
+coinstack:
+  endpoint: http://localhost:3000
+  server:
+    privatekeys: L3k5T3xBc6kc3owCHak84R14yyCQW5WQSPRBs3kNaZtdjyC2uyfZ
+
+openkeychain:
+  address: 14d4mVCnvG3wFTo7e8kgaJp85e8ca8hJEC
+  server: http://localhost:8082
+
+server:
+  hostname: localhost
+  domain: http://localhost:8080
+  port: 8080
+
+spring:
+  devtools:
+    livereload:
+      enabled: true
+
+  liquibase:
+    change-log: classpath:/db/krx-changelog-master.yaml
+
+  datasource:
+    url: jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;MODE=MYSQL
+    username: blocko
+    password: blocko
+    validationQuery: SELECT 1
+
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: true
+  jpa:
+    hibernate:
+      ddl-auto: create
+      format_sql: true
+    show-sql: true
+
+management:
+    endpoints:
+        web:
+            exposure:
+                include: '*'
+            base-path: /manage
+        enabled-by-default: false
+    endpoint:
+        health:
+            enabled: true
+        shutdown:
+            enabled: true

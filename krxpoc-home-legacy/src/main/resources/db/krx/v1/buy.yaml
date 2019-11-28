@@ -1,0 +1,53 @@
+databaseChangeLog:
+    - changeSet:
+        id: create BUY table
+        author: dilcheck
+        changes:
+            - createTable:
+                tableName: BUY
+                columns:
+                    - column:
+                        name: ORDERNUM
+                        type: VARCHAR(36)
+                        constraints:
+                            nullable: false
+                    - column:
+                        name: ID
+                        type: VARCHAR(10)
+                        constraints:
+                            nullable: false
+                    - column:
+                        name: TOKEN_ID
+                        type: int(11)
+                        constraints:
+                            nullable: false
+                    - column:
+                        name: AMOUNT
+                        type: int(11)
+                        constraints:
+                            nullable: false
+                    - column:
+                        name: PRICE
+                        type: int(11)
+                        constraints:
+                            nullable: false
+                    - column:
+                        name: LOCK
+                        type: boolean
+                        constraints:
+                            nullable: false
+                    - column:
+                        name: CREATED_AT
+                        type: timestamp
+            - createIndex:
+                indexName: IDX_BUY_PRICE
+                tableName: BUY
+                columns:
+                  - column:
+                      name: PRICE
+            - createIndex:
+                indexName: IDX_BUY_ORDERNUM
+                tableName: BUY
+                columns:
+                  - column:
+                      name: ORDERNUM

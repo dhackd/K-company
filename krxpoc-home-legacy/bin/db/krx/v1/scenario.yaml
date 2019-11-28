@@ -1,0 +1,34 @@
+databaseChangeLog:
+    - changeSet:
+        id: create SCENARIO table
+        author: dilcheck
+        changes:
+            - createTable:
+                tableName: SCENARIO
+                columns:
+                    - column:
+                        name: NUM
+                        type: int(11)
+                        constraints:
+                            nullable: false
+                    - column:
+                        name: TOKEN_NAME
+                        type: VARCHAR(50)
+                        constraints:
+                            nullable: false
+                    - column:
+                        name: TOPIC
+                        type: VARCHAR(50)
+                        constraints:
+                            nullable: false
+                    - column:
+                        name: GLOBAL_ID
+                        type: VARCHAR(100)
+                        constraints:
+                            nullable: false
+            - createIndex:
+                indexName: SCENARIO_NUM
+                tableName: SCENARIO
+                columns:
+                  - column:
+                      name: NUM
